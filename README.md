@@ -1,4 +1,4 @@
-joop
+jtools
 ====
 
-a javascript oop library
+a new kind javascript library
