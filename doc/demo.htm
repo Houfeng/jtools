@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>demo</title>
+    <script src="lib/joop.js" type="text/javascript"></script>
+    <script src="lib/sizzle.js" type="text/javascript"></script>
+    <script src="lib/ajax.js" type="text/javascript"></script>
+    <script src="lib/tween.js" type="text/javascript"></script>
+    <script src="lib/effect.js" type="text/javascript"></script>
+    <script src="lib/query.js" type="text/javascript"></script>
+    <script src="lib/ajax.js" type="text/javascript"></script>
+</head>
+<body>
+    <div style="position: relative;">
+        <h2>
+            简介</h2>
+        <div>
+            <strong>目标及意义</strong>：轻量，简洁，快速，模块化，易扩展，易于使用，每一个模块可独立使用（此演示将所有模块压到了一个文件中）,提供了完整的OOP机制!
+            针对移动设备优化！ 提供一个在大量编写javascript时易于管理维户的解决方法！
+        </div>
+        <h3>
+            已有或正在开发的模块</h3>
+        <ul>
+            <li>class.js OOP模块为核心模块，可独立使用，提供oop机制，提供完整兼容的事件机制。</li>
+            <li>tween.js 算法模块，可独立使用（依赖class），常用动画算法类。</li>
+            <li>effect.js 动画模块，可独立使用（依赖class,可选tween），提供够轻松的完成动画的能力。</li>
+            <li>query.js dom操作模，可独立使用（依赖class,可选effect，tween，sizzle），提供了类似jquery的功能。</li>
+            <li>sizzle.js 选择器，可独立使用，此模块为可选模块，若在ie8以下使用query模块必须引入sizzle，移动应用一般不用引入（会减少一大半体积，性能也有较大提高）。</li>
+            <li>ajax.js ajax模块正在开发中。</li>
+        </ul>
+        <h3>
+            未来可能加入的模块</h3>
+        <ul>
+            <li>ui.js 提供常规UI功能及组件</li>
+            <li>mobile.js 提供专门针对mobile的设备（虽然这东西从第一行代码开始就非常重要的考虚了mobile设备，也开初衷，但还是会有一个mobile的专用模块）</li>
+        </ul>
+    </div>
+    <hr />
+    <div>
+        下边是部分功能演示(目前包含的功能远不至这些，比如query.js对jquery常用功能60~70%都提供了类似的功能)，目前演示版本并没有经过严格测试，也还有一些正在开发的功能，也还有很多要完善的地方！</div>
+    <hr />
+    <div style="position: relative;">
+        <h2>
+            OOP</h2>
+        <input id="oop-btn" type="button" value="click me" />
+        <pre style="border: solid 1px #aaa; padding: 10px;">
+var ClassA = $class({
+    name: "",
+    say: function () {
+        alert("My name is : " + this.name);
+    },
+    $init: function (n) {
+        this.name = n;
+    }
+});
+
+var ClassB = $class({
+    $base: ClassA
+});
+
+var a = new ClassA("A");
+var b = new ClassB("B");
+
+$('#oop-btn').click(function () {
+    a.say();
+    b.say();
+});          
+        </pre>
+    </div>
+    <hr />
+    <div style="position: relative; height: 300px;">
+        <h2>
+            动画</h2>
+        <input id="animate-btn1" type="button" value="go" />
+        <input id="animate-btn2" type="button" value="back" />
+        <div id="animate-test" class="" style="height: 50px; width: 50px; opacity: 0.5; position: absolute;
+            left: 50px; top: 100px; border: solid 2px #333; background-color: Gray; display: block;">
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        //OOP
+        var ClassA = $class({
+            name: "",
+            say: function () {
+                alert("My name is : " + this.name);
+            },
+            $init: function (n) {
+                this.name = n;
+            }
+        });
+        var ClassB = $class({
+            $base: ClassA
+        });
+        var a = new ClassA("A");
+        var b = new ClassB("B");
+        $('#oop-btn').click(function () {
+            a.say();
+            b.say();
+        });
+
+        //动画
+        $('#animate-btn1').click(function () {
+            $('#animate-test').animate({ left: 400 }, 1000, null, Effect.tween.Elastic.easeInOut);
+        });
+        $('#animate-btn2').click(function () {
+            $('#animate-test').animate({ left: 50 }, 1000, null, Effect.tween.Elastic.easeInOut);
+        });
+
+        ajax.getJSONP({
+            url: 'demo.ashx',
+            data: { "name": 'houfeng' },
+            callback: function (dt) {
+                // alert(dt);
+            }
+        });
+    </script>
+</body>
+</html>
